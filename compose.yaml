@@ -1,0 +1,12 @@
+services:
+  weather:
+    restart: always
+    build: .
+    ports:
+      - "80:80"
+    image: weather
+    environment:
+      VC_API_KEY: ${VC_API_KEY}
+      GIT_VAL: ${GIT_VAL}
+      GIT_KEY: ${GIT_KEY}
+      API_SEC_KEY: ${API_SEC_KEY}

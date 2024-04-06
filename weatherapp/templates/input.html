@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Weather app</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        .center-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+        }
+        .center-div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+
+    <div class="center-form">
+        <form method="post">
+		<h1 class="mb-4">{{ vault_key }}</h1>
+            <h1 class="mb-4">Enter City or Country Name</h1>
+            <div class="input-group mb-3">
+                <input type="text" name="location" class="form-control" placeholder="Enter city or country name" required>
+                <button class="btn w-30 mb-8 btn-primary shadow" type="submit">Get Weather</button>
+            </div>
+            <div class="center-div">
+                <label style="color:red;">{{ error }}</label>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

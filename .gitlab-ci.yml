@@ -1,0 +1,37 @@
+stages:
+  - build
+  - test
+  - push
+  - clean
+
+build-image:
+  stage: build
+  variables:
+    VAULT_ADDR: "http://172.31.51.124:8200"
+    GIT_KEY: "Assignment"
+  script:
+    - export VAULT_TOKEN=$(vault write -field=token auth/approle/login role_id=$VAULT_ROLE_ID secret_id=$VAULT_SECRET_ID)
+    - export GIT_VAL=$(vault kv get -field=$GIT_KEY gitlab-ci/mysecret)
+    - export VC_API_KEY=$(vault kv get -field=VC_API_KEY gitlab-ci/apikey)
+    - export API_SEC_KEY=$(vault kv get -field=API_SEC_KEY gitlab-ci/appkey)
+      #- docker compose build --no-cache
+    - docker compose up -d
+
+test-image:
+  stage: test
+  script:
+    - curl -s -o /dev/null -w "%{http_code}" http://172.31.24.82/ | grep -q 200 || exit 1
+
+push-image:
+  stage: push
+  script:
+      - docker login -u gitlab-ci-token -p $ACCESS_TOKEN $CI_REGISTRY
+      - docker tag weather 34.193.158.247:5050/root/weatherapp
+      - docker push 34.193.158.247:5050/root/weatherapp
+
+clean:
+  stage: clean
+  script:
+    - docker logout
+    - docker compose down --rmi all --volumes
+  when: always 

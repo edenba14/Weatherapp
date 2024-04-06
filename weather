@@ -1,0 +1,16 @@
+server{
+       	listen 80;
+
+        #listen 443 ssl;
+        #ssl_certificate /cert/nginx-selfsigned.crt;
+        #ssl_certificate_key /cert/nginx-selfsigned.key; 
+
+        server_name _;
+        location / {
+                #deny 10.1.0.147;
+                #limit_req zone=mylimit burst=1;
+                #limit_conn addr 5;
+                include proxy_params;
+                proxy_pass http://unix:/weatherapp/weather.sock;
+        }
+}

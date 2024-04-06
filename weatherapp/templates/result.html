@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+        <h1>Weather Forecast</h1>
+    <br><br>
+        <h2>{{ location }}</h2><br>
+    <div class="knowledge-grid">
+        {% for day in forecast %}
+        <div class="knowledge-item">
+            {% if day.morning_temperature > 20 %}
+                <i class="bi bi-sun"></i>
+            {% else %}
+                {% if day.morning_temperature > 5 %}
+                    <i class="bi bi-cloud-sun"></i>
+                {% else %}
+                    <i class="bi bi-snow"></i>
+                {% endif %}
+            {% endif %}
+            <h5>{{ datetime.strptime(day.date, '%Y-%m-%d').strftime('%A') }}</h5>
+            <h6>{{ datetime.strptime(day.date, '%Y-%m-%d').strftime('%d.%m') }}</h6>
+            <p>Day: {{ day.morning_temperature }} °C</p>
+            <p>Night: {{ day.night_temperature }} °C</p>
+            <p>Humidity: {{ day.humidity }}% </p>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="btn w-30 mb-8 btn-primary shadow" onclick="window.location.href='/'">Back to Input</button>
+</div>
+</body>
+</html>

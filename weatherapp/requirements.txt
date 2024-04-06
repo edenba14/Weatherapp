@@ -1,0 +1,8 @@
+Flask
+pytest
+requests
+translate
+Flask-Caching
+gunicorn
+python-dotenv
+

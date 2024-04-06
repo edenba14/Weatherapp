@@ -1,0 +1,31 @@
+.container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 15px;
+}
+
+.knowledge-grid {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;
+}
+
+.knowledge-item {
+ width: calc(160px);
+ margin-bottom: 20px;
+ padding: 15px;
+ box-sizing: border-box;
+ background-color: #f8f9fa;
+ border: 1px solid #dee2e6;
+ border-radius: 5px;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.knowledge-item h5 {
+ margin-top: 0;
+}
+
+.knowledge-item p {
+ margin-bottom: 0;
+}
+
