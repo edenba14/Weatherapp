@@ -19,8 +19,11 @@ build-image:
 
 test-image:
   stage: test
+  variables:
+    ADDRESS: "http://172.31.24.82"
   script:
-    - curl -s -o /dev/null -w "%{http_code}" http://172.31.24.82/ | grep -q 200 || exit 1
+    #- curl -s -o /dev/null -w "%{http_code}" http://172.31.24.82/ | grep -q 200 || exit 1
+    - ./test.sh $ADDRESS
 
 push-image:
   stage: push
